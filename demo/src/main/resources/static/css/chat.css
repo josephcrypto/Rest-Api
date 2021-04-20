@@ -1,0 +1,107 @@
+@charset "UTF-8";
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  font-family: "微软雅黑";
+  background-color: rgba(0, 0, 0, 0.8);
+  overflow: hidden; }
+
+header, main, footer {
+  width: 100%; }
+
+ul {
+  padding: 0; }
+  ul li {
+    list-style: none; }
+
+.container {
+  width: 100%;
+  height: 100%; }
+
+#chat-title {
+  height: 36px;
+  line-height: 36px;
+  border-bottom: 1px solid #5a4a3e;
+  color: #ffd478;
+  font-size: 18px;
+  font-weight: bold;
+  padding-bottom: 4px; }
+  #chat-title img {
+    height: 34px;
+    margin-right: 1rem;
+    float: left; }
+  #chat-title span {
+    color: red;
+    font-weight: normal;
+    font-size: 14px;
+    margin-left: 4rem; }
+    #chat-title span strong {
+      color: #ffd478; }
+
+#log {
+  width: calc( 100% - 2rem );
+  height: calc( 85% - 36px );
+  padding: 1rem; }
+  #log h3 {
+    color: #ad4040;
+    font-size: 1rem;
+    margin: 0; }
+  #log ul {
+    color: white; }
+    #log ul li.customer-service {
+      text-align: left;
+      color: #ffffff;
+      clear: both; }
+      #log ul li.customer-service span {
+        display: block;
+        border: 1px #2f2620 solid;
+        border-radius: 10px;
+        background-color: #2f2620;
+        padding: .3rem .6rem .3rem 2.5rem;
+        float: left;
+        background-image: url(../images/logo1.png);
+        background-repeat: no-repeat;
+        background-size: auto 100%; }
+    #log ul li.myself {
+      text-align: right;
+      color: #ffd478;
+      clear: both; }
+      #log ul li.myself span {
+        display: block;
+        border: 1px #302417 solid;
+        border-radius: 10px;
+        background-color: #302417;
+        padding: .3rem 2.5rem .3rem .6rem;
+        float: right;
+        background-image: url(../images/customer.png);
+        background-position: right;
+        background-repeat: no-repeat;
+        background-size: auto 100%; }
+
+#message-input {
+  height: 15%;
+  border-top: 1px solid #5a4a3e;
+  display: flex; }
+  #message-input input {
+    background-color: #2b2a28;
+    border: 1px solid #2b2a28;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    width: 95%;
+    height: 38%;
+    margin-top: 3px;
+    margin-left: 4px;
+    color: white; }
+  #message-input button {
+    width: 5%;
+    height: 41%;
+    padding: 0;
+    border: none;
+    margin-top: 4px;
+    background: none; }
+    #message-input button img {
+      width: 100%;
+      height: 100%; }
+
+/*# sourceMappingURL=chat.css.map */

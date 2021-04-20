@@ -1,0 +1,146 @@
+@charset "utf-8";  /*  定义字符集 utf8 */
+html, body
+    {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    body
+    {
+        background-color: rgba(255, 255, 255, .9);
+        overflow: hidden;   /* 溢出隐藏， 去掉滚动条 */
+        /*border: 1px #6e5b4d solid;
+        border-radius: 50px;*/
+    }
+    ul
+    {
+        padding: 0;
+        margin: 0;
+    }
+    li
+    {
+        list-style: none; /* 列表样式 无 */
+    }
+
+    .heng
+    {
+        display: flex; /* 显示 flex */
+    }
+
+    .modal-content
+    {
+        width: 100%;
+        height: 100%;
+    }
+
+    .modal-header
+    {
+        border-bottom: 1px #6e5b4d solid; /* px像素 solid 实线 */
+        height: 2.5rem;
+        padding-top: 10px;
+        background-color: black;
+    }
+
+    .modal-title
+    {
+        text-align: center;
+        color: #ffd478;
+        font-size: 1.5rem;
+        margin: 0;
+    }
+    
+    #content
+    {
+        width: 100%;
+        height: calc( 100% - 2.5rem );
+    }
+
+    /* 宽度 */
+    #online-users
+    {
+        width: 20%;
+        height: 100%;
+        overflow: scroll;
+    }
+    #chat
+    {
+        width: 60%;
+        height: 100%;
+        padding: 10px 20px 0 20px;
+    }
+    #one-user
+    {
+        width: 20%;
+        height: 100%;
+        background-color: gray;
+    }
+
+    /* 在线用户开始 */
+    #online-users h4
+    {
+        margin: 0;
+        height: 3rem;
+        line-height: 3rem;
+        color: rgb(28, 156, 241);
+        text-align: center;
+        border-bottom: 2px solid #a59182;
+    }
+    #online-users ul li
+    {
+        height: 4rem;
+        line-height: 4rem;
+        border-bottom: 2px solid #a59182;
+        cursor: pointer;
+    }
+    #online-users ul li:hover
+    {
+        color: darkgreen;
+        background-color: lightgreen;
+    }
+    #online-users ul li img
+    {
+        width: 3.5rem;
+        height: 3.5rem;
+        border-radius: 50%;
+        float: left;
+        margin-right: 1rem;
+    }
+    /* 在线用户结束 */
+    /* 聊天内容开始 */
+    #chat-title
+    {
+        width: 96%;
+        height: 3rem;
+        line-height: 3rem;
+        padding-left: 2rem;
+        color: darkgreen;
+        background-color: lightgreen;
+        border-radius: 10px;
+    }
+
+    /* 聊天内容结束 */
+    #user-info
+    {
+        width: 90%;
+        height: 60%;
+        background-color: white;
+        margin-left: 5%;
+    }
+    #user-info ul
+    {
+        height: 100%;
+    }
+    #user-info ul li
+    {
+        padding-top: 10%;
+        height: calc( 100% / 6 - 10% );
+    }
+    #fast-reply, #welcome-words
+    {
+        width: 90%;
+        height: 18%;
+        background-color: white;
+        margin-top: 2%;
+        margin-left: 5%;
+    }

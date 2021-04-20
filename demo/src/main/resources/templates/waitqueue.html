@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>迪威客服系统</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    html, body
+    {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    body
+    {
+        background-color: rgba(0, 0, 0, .9);
+        overflow: hidden;   /* 溢出隐藏， 去掉滚动条 */
+        /*border: 1px #6e5b4d solid;
+        border-radius: 50px;*/
+    }
+
+    .modal-content
+    {
+        width: 100%;
+        height: 100%;
+    }
+
+    .modal-header
+    {
+        border-bottom: 1px #6e5b4d solid;
+        height: 2.5rem;
+        padding-top: 10px;
+        background-color: black;
+    }
+
+    .modal-title
+    {
+        text-align: center;
+        color: #ffd478;
+        font-size: 1.5rem;
+        margin: 0;
+    }
+
+    #content
+    {
+        width: 100%;
+        height: calc( 100% - 2.5rem - 10px );
+        display: flex;
+    }
+    #content .left-menu
+    {
+        width: 50%;
+        border-right:1px solid  #6e5b4d;
+        text-align: center;
+        color: #ffd478;
+        padding-top: 4rem;
+        font-size: 1.5rem;
+    }
+    #content .left-menu img
+    {
+        width: 45%;
+    }
+    #content .rigth-menu
+    {
+        width: 50%;
+        padding-left: 6%;
+        padding-right: 5%;
+    }
+    #content .rigth-menu ul
+    {
+        margin-top: 2rem;
+        padding: 0;
+    }
+    #content .rigth-menu ul li
+    {
+        margin-top: 1.2rem;
+        list-style-type: none;
+        color: white;
+        font-size: 1.3rem;
+    }
+    #content .rigth-menu ul li label
+    {
+        color: #f4c463;
+    }
+    #content .rigth-menu ul li.second
+    {
+        /*margin-top: 4rem;*/
+        color: white;
+    }
+    #content .rigth-menu ul li.item,  .required
+    {
+        color: #ae2e2e;
+    }
+    #content .rigth-menu ul li.item.checked
+    {
+        color: #f4c463;
+    }
+    #content .rigth-menu ul li span.username
+    {
+        margin-left: 10px;
+        font-weight: bold;
+        color:#ffb005;
+    }
+
+    #footer{
+        text-align: right;
+    }
+    #footer .start
+    {
+        width: 46%;
+        height: 2rem;
+        background-image: linear-gradient(to right, #ffca6d, #f3913a);
+        color: black;
+        padding: 0 .7rem;
+        border: none;
+        border-radius: 20px;
+        font-size: 1.4rem;
+    }
+
+  </style>
+
+</head>
+<body>
+
+<div class="modal-content">
+    <!-- Modal Header -->
+    <header class="modal-header">
+        <h6 class="modal-title">迪威在线客服系统 </h6>
+    </header>
+
+    <!-- Modal body -->
+    <div id="content">
+        <div class="left-menu">
+            <img src="images/logo.png"></img>
+            <p>迪威集团</p>
+            <p>自研即时通讯系统</p>
+        </div>
+
+        <div class="rigth-menu">
+            <ul>
+                <li class="item checked">
+                    当前队列还有<strong class="required" th:text="${countWaiting}" />人在等待
+                </li>
+                <li>
+                    客服坐席忙。请耐心等待......
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+
+</body>
+</html>

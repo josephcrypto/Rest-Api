@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>迪威客服系统后台</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/css/backend.css">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script>
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: '/listqueue',
+            success: function (json) {
+                //console.log(json);
+                $.each(json,  function(index, element){
+                    $("#list-queue").append("<li><img src='/images/touxiang.jpeg' />" + element.country + element.province + element.city + element.isp + "</li>");
+                });
+
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                console.log(textStatus);
+            }
+        });
+
+    </script>
+</head>
+<body>
+
+<div class="modal-content">
+    <!-- 网页头部开始 -->
+    <header class="modal-header">
+        <h6 class="modal-title">迪威在线客服系统 </h6>
+    </header>
+    <!-- 网页头部结束 -->
+    <!-- 网页内容开始 -->
+    <main id="content" class="heng">
+        <!-- 在线用户开始 -->
+        <aside id="online-users">
+            <h4>在线用户</h4>
+            <ul id="list-queue">
+
+            </ul>
+        </aside>
+        <!-- 在线用户结束 -->
+        <!-- 聊天内容开始 -->
+        <section id="chat">
+            <!-- 聊天标题 开始 -->
+            <div id="chat-title">
+                #2758中国北京北京网友
+            </div>
+            <!-- 聊天标题 结束 -->
+            <!-- 聊天内容 开始 -->
+            <div id="chat-content">
+                聊天内容
+            </div>
+            <!-- 聊天内容 结束 -->
+            <!-- 输入框 开始 -->
+            <div id="chat-input">
+                输入框
+            </div>
+            <!-- 输入框 结束 -->
+        </section>
+        <!-- 聊天内容结束 -->
+        <!-- 访客信息开始 -->
+        <aside id="one-user">
+            <!-- 用户信息 开始 -->
+            <div id="user-info">
+                <ul>
+                    <li>城市：中国北京北京</li>
+                    <li>来源：陶士涵.博客围</li>
+                    <li>首次访问：2021-02-19T17:20:43+08:00</li>
+                    <li>最后访问：2021-02-23T10:47:34+08:00</li>
+                    <li>状态：在线</li>
+                    <li>地址：http;//www.cnblogs.com/taoshiham/</li>
+                </ul>
+            </div>
+            <!-- 用户信息 结束 -->
+            <!-- 快速回复 开始 -->
+            <div id="fast-reply">
+                快速回复
+            </div>
+            <!-- 快速回复 结束 -->
+            <!-- 欢迎词 开始 -->
+            <div id="welcome-words">
+                欢迎词
+            </div>
+            <!-- 欢迎词 结束 -->
+        </aside>
+        <!-- 访客信息结束 -->
+    </main>
+    <!-- 网页内容结束 -->
+</div>
+
+</body>
+</html>

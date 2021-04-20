@@ -1,0 +1,132 @@
+
+<html>
+<head>
+    <title>迪威客服</title>
+    <!--<script src="/js/jquery.min.js"></script>-->
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <meta charset="UTF-8" />
+    <title>迪威自研在线客服系统</title>
+    <link href="/css/chat.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+        $(function() {
+            var conn;
+            var msg = $("#message-text");
+            var log = $("#chat-messages");
+            uid= [[${uid}]];
+            to_uid= [[${touid}]];
+			console.log(uid, to_uid);
+
+            function appendLog(msg) {
+                var d = log[0]
+                var doScroll = d.scrollTop == d.scrollHeight - d.clientHeight;
+                msg.appendTo(log)
+                if (doScroll) {
+                    d.scrollTop = d.scrollHeight - d.clientHeight;
+                }
+            }
+
+            //发送消息
+            function sendajax()
+            {
+                if (!conn) {
+                    return false;
+                }
+                if (!msg.val()) {
+                    return false;
+                }
+
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: '/sendmessage',
+                    contentType: "application/json",
+                    data:JSON.stringify({
+                        "uid": uid,
+                        "touid": to_uid,
+                        "content": msg.val()
+                    }),
+                    success: function (json) {
+                        appendLog($('<li class="myself"/>').append('<span>' + json.content + '</span>'));
+                        msg.val("");
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        appendLog($('<li class="myself"/>').append('<span style="color:yellow;">请求失败: ' + textStatus + '</span>'));
+                    }
+                });
+
+            }
+
+            //发送
+            $("#btn").click(function() {
+                sendajax();
+                return false;
+            });
+
+            if (window["WebSocket"]) {
+                conn = new WebSocket("ws://192.168.0.2:22599/webSocket/"+uid);
+                conn.onclose = function(evt) {
+                    appendLog($('<li class="customer-service"/>').append('<span style="color:yellow;">您的连接丢失，请刷新并检查网络</span>'));
+                    console.log('连接关闭');
+                }
+                conn.onmessage = function(evt) {
+                    console.log(evt.data);
+                    var obj = JSON.parse(evt.data);
+                    appendLog($('<li class="customer-service"/>').append('<span>' + obj.content + '</span>'));
+                }
+            } else {
+                appendLog($("<div><b>不支持WebSockets</b></div>"))
+            }
+        });
+    </script>
+
+</head>
+<body>
+<!--<div id="log"></div>
+<form id="form">
+    <input type="submit" value="发送" />
+    <input type="text" id="msg" size="64"/>
+</form>-->
+<div class="container">
+    <!-- 网站头部 header //start -->
+    <header id="chat-title">
+        <img src="../images/logo4.png" />
+        迪威自研在线客服系统
+        <!--<span>当前等待还有<strong>5</strong>个人</span>-->
+    </header>
+    <!-- 网站尾部 header //end -->
+    <!-- 聊天部分 chat //start -->
+    <main id="log">
+        <h3>温馨提示：若在网吧等公共场所上网，请注意周围环境安全。</h3>
+        <ul id="chat-messages">
+            <!--<li class="customer-service">
+                <span>What can I do for you?</span>
+            </li>
+            <li class="myself">
+                <span>I lost money.</span>
+            </li>
+            <li class="customer-service">
+                <span>What can I do for you?</span>
+            </li>
+            <li class="myself">
+                <span>I lost money.</span>
+            </li>
+            <li class="customer-service">
+                <span>What can I do for you?</span>
+            </li>
+            <li class="myself">
+                <span>I lost money.</span>
+            </li>-->
+        </ul>
+    </main>
+    <!-- 聊天部分 chat //end -->
+    <!-- 输入部分 text input //start -->
+    <footer id="message-input">
+        <input type="text" id="message-text" />
+        <button type="submit" id="btn">
+            <img src="../images/button.png" />
+        </button>
+    </footer>
+    <!-- 输入部分 text input //end -->
+</div>
+</body>
+</html>

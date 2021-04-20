@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>迪威客服系统</title>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    html, body
+    {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    body
+    {
+        background-color: rgba(0, 0, 0, .9);
+        overflow: hidden;   /* 溢出隐藏， 去掉滚动条 */
+        /*border: 1px #6e5b4d solid;
+        border-radius: 50px;*/
+    }
+
+    .modal-content
+    {
+        width: 100%;
+        height: 100%;
+    }
+
+    .modal-header
+    {
+        border-bottom: 1px #6e5b4d solid;
+        height: 2.5rem;
+        padding-top: 10px;
+        background-color: black;
+    }
+
+    .modal-title
+    {
+        text-align: center;
+        color: #ffd478;
+        font-size: 1.5rem;
+        margin: 0;
+    }
+
+    #content
+    {
+        width: 100%;
+        height: calc( 100% - 2.5rem - 10px );
+        display: flex;
+    }
+    #content .left-menu
+    {
+        width: 50%;
+        border-right:1px solid  #6e5b4d;
+        text-align: center;
+        color: #ffd478;
+        padding-top: 4rem;
+        font-size: 1.5rem;
+    }
+    #content .left-menu img
+    {
+        width: 45%;
+    }
+    #content .rigth-menu
+    {
+        width: 50%;
+        padding-left: 6%;
+        padding-right: 5%;
+    }
+    #content .rigth-menu ul
+    {
+        margin-top: 2rem;
+        padding: 0;
+    }
+    #content .rigth-menu ul li
+    {
+        margin-top: 1.2rem;
+        list-style-type: none;
+        color: white;
+        font-size: 1.3rem;
+    }
+    #content .rigth-menu ul li label
+    {
+        color: #f4c463;
+    }
+    #content .rigth-menu ul li.second
+    {
+        /*margin-top: 4rem;*/
+        color: white;
+    }
+    #content .rigth-menu ul li.item,  .required
+    {
+        color: #ae2e2e;
+    }
+    #content .rigth-menu ul li.item.checked
+    {
+        color: #f4c463;
+    }
+    #content .rigth-menu ul li span.username
+    {
+        margin-left: 10px;
+        font-weight: bold;
+        color:#ffb005;
+    }
+
+    #footer{
+        text-align: right;
+    }
+    #footer .start
+    {
+        width: 46%;
+        height: 2rem;
+        background-image: linear-gradient(to right, #ffca6d, #f3913a);
+        color: black;
+        padding: 0 .7rem;
+        border: none;
+        border-radius: 20px;
+        font-size: 1.4rem;
+        cursor: pointer;
+    }
+
+  </style>
+    <script>
+        $(function() {
+            $('#start').click(function(){
+                /*$.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: '/join',
+                    contentType: "application/json",
+                    data:JSON.stringify({
+                        "uid": uid,
+                        "touid": to_uid,
+                        "content": msg.val()
+                    }),
+                    success: function (json) {
+                        appendLog($('<li class="myself"/>').append('<span>' + json.content + '</span>'));
+                        msg.val("");
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        appendLog($('<li class="myself"/>').append('<span style="color:yellow;">请求失败: ' + textStatus + '</span>'));
+                    }
+                });*/
+                var datas = {};
+                var ss = $('#datas input, #datas select').serializeArray();
+                $.each(ss, function(index, ele){
+                    datas[ ele.name ] = ele.value;
+                });
+                //console.log( datas );
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: '/join',
+                    contentType: "application/json",
+                    data:JSON.stringify(datas),
+                    success: function (json) {
+                        //跳转到 /waitqueue
+                        console.log(json);
+                        if(json.code=="1")
+                            window.location = "/waitqueue";
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        alert('请求失败: ' + textStatus );
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+
+<div class="modal-content">
+    <!-- Modal Header -->
+    <header class="modal-header">
+        <h6 class="modal-title">迪威在线客服系统 </h6>
+    </header>
+
+    <!-- Modal body -->
+    <div id="content">
+        <div class="left-menu">
+            <img src="images/logo.png"></img>
+            <p>迪威集团</p>
+            <p>自研即时通讯系统</p>
+        </div>
+
+        <div class="rigth-menu">
+            <ul id="datas">
+                <li class="item">
+                    <label>姓&nbsp; &nbsp;名 <span class="required">*</span></label>
+                    <input id="real-name" type="text" name="real_name" />
+                </li>
+                <li class="item">
+                    <label>手机号 <span class="required">*</span></label>
+                    <input id="mobile" type="text" name="mobile" />
+                </li>
+                <li class="second">
+                    请选择您要咨询的问题：（多选）
+                </li>
+                <li class="item">
+                    <input type="checkbox" name="item2" value="1" />
+                    1) 开户问题
+                </li>
+                <li class="item">
+                    <input type="checkbox" name="item3" value="1" />
+                    2) 游戏开奖结算等问题
+                </li>
+                <li class="item">
+                    <input type="checkbox" name="item4" value="1" />
+                    3) 游戏过程中的问题
+                </li>
+                <li class="item">
+                    4) 其他问题
+                    <input id="others" type="text" name="others" />
+                </li>
+            </ul>
+            <footer id="footer">
+                <button type="button" id="start" class="start" data-dismiss="modal">开始对话吧</button>
+            </footer>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
